@@ -1,77 +1,111 @@
 import java.util.Arrays;
 import java.util.EmptyStackException;
-public class ArrayStackJava<T> {
+
+public class ArrayStackJava {
+    public static void main(String[] args) {
+        // Create a stack of integers
+        Stack<Integer>   S1= new Stack<>();
+
+        // Push some elements
+        S1.pushStack(70);
+        S1.pushStack(20);
+        S1.pushStack(60);
+        S1.pushStack(50);
+        S1.pushStack(550);
+
+        // Display the stack
+        S1.display();
+
+        // Peek at the top element
+        System.out.println("Top element at peek: " + S1.peekStack());
+
+        // Pop an element
+        System.out.println("Pop element: " + S1.popStack());
+
+        // Display again after popping
+        S1.display();
+
+        // Push another element
+        S1.pushStack(40);
+        S1.pushStack(50);
+
+        // Display final stack
+        S1.display();
+
+        // Show size
+        System.out.println("Current stack size: " + S1.size());
+
+        // Check if empty
+        System.out.println("Is the stack empty? " + S1.isEmpty());
+    }
+}
+
+class Stack<T> {
     private static final int DEFAULT = 3;
-    private int kor;
-    private T[] stackarray;
+    private int TOPON;
+    private T[] ArryStackVariable;
 
-    //No Argument Constructor
-
-    ArrayStackJava() {this(DEFAULT);
+    // No-arg constructor
+    Stack() {
+        this(DEFAULT);
     }
-    ArrayStackJava(int InitialSize) {
-        kor = 0;
-        stackarray = (T[]) (new Object[InitialSize]);
 
+    Stack(int Inizialization) {
+        TOPON = 0;
+        ArryStackVariable= (T[]) (new Object[Inizialization]);
     }
-    //size method
 
+    // size
     public int size() {
-        return kor;
+        return TOPON;
     }
 
-    //push method
-
-    public void push(T element) {
-        if (size() == stackarray.length)
+    // push method
+    public void pushStack(T Element) {
+        if (size() == ArryStackVariable.length)
             Expand();
-        stackarray[kor] = element;
-        kor++;
+        ArryStackVariable[TOPON] = Element;
+        TOPON++;
     }
 
-    //pop method
-
-    public T pop() {
+    // pop method
+    public T popStack() {
         if (isEmpty())
             throw new EmptyStackException();
         else {
-            //top--;
-            T natiijo = stackarray[--kor];
-            stackarray[kor] = null;
-            return natiijo;
+            T Result = ArryStackVariable[--TOPON];
+            ArryStackVariable[TOPON] = null;
+            return Result;
         }
     }
 
-    //peek method
-
-    public T peek(){
+    // peek method
+    public T peekStack() {
         if (isEmpty())
             throw new EmptyStackException();
         else
-            return stackarray[kor-1];
+            return ArryStackVariable[TOPON - 1];
     }
 
-    //isEmpty method
-
-    public boolean isEmpty(){
-        return kor ==0;
+    // isEmpty method
+    public boolean isEmpty() {
+        return TOPON == 0;
     }
 
-    //expand method
-
-    public void Expand(){
-        stackarray = Arrays.copyOf(stackarray,stackarray.length*4);
+    // expand method balaari wayay
+    public void Expand() {
+        ArryStackVariable = Arrays.copyOf(ArryStackVariable, ArryStackVariable.length * 2);
     }
 
-    //display
-
-    public void displaymethod(){
+    // display method
+    public void display() {
         if (isEmpty())
             throw new EmptyStackException();
-        else
-            System.out.println("Elements of an array: ");
-        for (int n = 0; n<kor;n++)
-            System.out.println(stackarray[n] + " ");
-        System.out.println();
+        else {
+            System.out.println("The element of the Stack is :");
+            for (int x = 0; x <TOPON; x++)
+                System.out.print(ArryStackVariable[x] + " ");
+            System.out.println();
+        }
     }
 }
